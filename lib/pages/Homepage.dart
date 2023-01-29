@@ -12,8 +12,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HEADLINES"),
+        title: Text(
+          "HEADLINES",
+          style: TextStyle(
+            fontSize: 29,
+            fontWeight: FontWeight.bold,
+            color: Color(0xffffffff),
+          ),
+        ),
+        backgroundColor: Colors.black,
       ),
+      backgroundColor: Color(0xff464646),
     );
   }
 }
