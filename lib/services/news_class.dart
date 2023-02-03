@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final NewsHeadlines = NewsArticalFromJson(jsonString);
+//     final welcome = welcomeFromJson(jsonString);
 
 import 'dart:convert';
 
-NewsHeadlines NewsArticalFromJson(String str) =>
+NewsHeadlines welcomeFromJson(String str) =>
     NewsHeadlines.fromJson(json.decode(str));
 
-String NewsArticalToJson(NewsHeadlines data) => json.encode(data.toJson());
+String welcomeToJson(NewsHeadlines data) => json.encode(data.toJson());
 
 class NewsHeadlines {
   NewsHeadlines({

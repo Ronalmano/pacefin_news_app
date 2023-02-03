@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pacefin_news_app/services/news_class.dart';
 import 'package:pacefin_news_app/services/news_service.dart';
@@ -10,12 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<NewsHeadlines> nhl;
+  late Future<NewsHeadlines?> nhlt;
 
   @override
-  void initstate() {
-    super.initState();
-    nhl = newsService().getNews();
+  void initState() {
+    log("HP");
+    nhlt = NewsService().getNews();
   }
 
   @override
@@ -33,21 +35,36 @@ class _HomePageState extends State<HomePage> {
         elevation: 0.0,
         backgroundColor: Colors.black,
       ),
-      body: Column(
-        children: [
-          Text("Body"),
-          FutureBuilder(
-              future: nhl,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text("Body");
-                } else {
-                  return CircularProgressIndicator();
-                }
-              })
-        ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 10, 16.0, 10.0),
+          child: Column(
+            children: [
+              const Text("Body"),
+              FutureBuilder<NewsHeadlines?>(
+                  future: nhlt,
+                  builder: (context, AsyncSnapshot<NewsHeadlines?> snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          // scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data?.totalResults,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: 20,
+                              width: 100,
+                              child: Text(snapshot.data!.articles[1].title),
+                            );
+                          });
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  })
+            ],
+          ),
+        ),
       ),
-      backgroundColor: Color(0xff464646),
+      backgroundColor: const Color(0xff464646),
     );
   }
 }
