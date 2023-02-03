@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pacefin_news_app/services/news_class.dart';
+import 'package:pacefin_news_app/services/news_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +11,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<NewsHeadlines> nhl;
+
+  @override
+  void initstate() {
+    super.initState();
+    nhl = newsService().getNews();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +32,20 @@ class _HomePageState extends State<HomePage> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.black,
+      ),
+      body: Column(
+        children: [
+          Text("Body"),
+          FutureBuilder(
+              future: nhl,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text("Body");
+                } else {
+                  return CircularProgressIndicator();
+                }
+              })
+        ],
       ),
       backgroundColor: Color(0xff464646),
     );
