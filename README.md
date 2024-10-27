@@ -4,7 +4,9 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application. Created by Pratyush Aryan
+This project is a starting point for a Flutter application. Created by Pratyush Aryan.
+
+This project contains ews snippets.
 
 A few resources to get you started if this is your first Flutter project:
 
